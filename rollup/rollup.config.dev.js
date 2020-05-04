@@ -1,19 +1,19 @@
-import commonConfig from './rollup.config';
+import commonConfig, { bundleName } from './rollup.config';
 
 const config = {
     ...commonConfig,
     output: [
 		{
-			name: 'Readability',
-			file: 'dist/readability.js',
+			name: 'CodePen',
+			file: `dist/${bundleName}.js`,
 			format: 'iife'
 		},
 		{
-			file: 'dist/readability.es.js',
+			file: `dist/${bundleName}.es.js`,
 			format: 'es'
 		},
 		{
-			file: 'dist/readability.cjs.js',
+			file: `dist/${bundleName}.cjs.js`,
 			format: 'cjs'
 		}
 	]
