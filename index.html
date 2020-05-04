@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodePen Component Test</title>
+</head>
+<body>
+    <input type="text" name="codepen" id="codepen-slug">
+
+    <code-pen>
+        <div slot="codepen-fallback">
+            <h2>Fallback Content</h2>
+            <!-- <img src="https://images.unsplash.com/photo-1526063402628-3cda107c8df7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2069&q=80" alt=""> -->
+        </div>
+    </code-pen>
+
+    <script src="dist/codepen.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            customElements.define('code-pen', CodePen);
+
+            const codepenSlugInput = document.getElementById('codepen-slug');
+            const codepen = document.querySelector('code-pen');
+
+            codepenSlugInput.addEventListener('input', () => {
+                codepen.setAttribute('data-slug-hash', codepenSlugInput.value);
+            });
+        });
+    </script>
+</body>
+</html>
