@@ -21,7 +21,7 @@ A web component for [embedded CodePens](https://blog.codepen.io/documentation/em
         data-height="150">
     </code-bed>
 
-    <script src="https://cdn.jsdelivr.net/npm/code-bed@1.0.1/dist/codebed.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/code-bed@1.0.2/dist/codebed.min.js"></script>
     <script>
         customElements.define('code-bed', CodeBed);
     </script>
