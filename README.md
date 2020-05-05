@@ -1,11 +1,12 @@
 # code-bed
 A web component for [embedded CodePens](https://blog.codepen.io/documentation/embedded-pens/).
 
+[Try it out!](https://codepen.io/rcasto/pen/ExVoXKW)
+
 ## Usage
 1. Include the script tag on your page or include in your bundle.
 2. Add definition to [customElements registry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define). You can change from suggested `code-bed` if ya want.
 3. Use `<code-bed></code-bed>` on your page. [More info on embed attributes](https://blog.codepen.io/documentation/embedded-pens/#override-attributes-5) that can be customized, these same attributes can be used via the code-bed web component.
-
 
 ```html
 <html lang="en">
@@ -20,7 +21,7 @@ A web component for [embedded CodePens](https://blog.codepen.io/documentation/em
         data-height="150">
     </code-bed>
 
-    <script src="dist/codepen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/code-bed@1.0.1/dist/codebed.min.js"></script>
     <script>
         customElements.define('code-bed', CodePen);
     </script>
