@@ -29,7 +29,7 @@ export default class CodePen extends HTMLElement {
 
     this.codepenEmbedElem = null;
   }
-  reloadCodepenEmbed() {
+  reloadCodePenEmbed() {
     const templateClone = template.content.cloneNode(true);
 
     this.textContent = '';
@@ -50,9 +50,9 @@ export default class CodePen extends HTMLElement {
       return;
     }
 
-    this.reloadCodepenEmbed();
+    this.reloadCodePenEmbed();
   }
   attributeChangedCallback() {
-    this.reloadCodepenEmbed();
+    this.reloadCodePenEmbed();
   }
 }
