@@ -99,13 +99,8 @@ export default class CodePen extends HTMLElement {
     this.initCodePenEmbedScript();
   }
   attributeChangedCallback() {
-    console.log('attribute changed');
-
     this.resetContent();
     copyAttributes(this, this.codepenEmbedElem, codepenEmbedAttributes);
     triggerCodePenEmbedReload();
-  }
-  disconnectedCallback() {
-    console.log('disconnected');
   }
 }
