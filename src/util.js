@@ -1,3 +1,5 @@
+let loadingCodePenEmbedScriptPromise = null;
+
 function hasCodePenEmbedScript() {
     return typeof window.__CPEmbed === 'function';
 }
@@ -11,7 +13,11 @@ export function triggerCodePenEmbedReload() {
 }
 
 export function loadCodePenEmbedScript() {
-    return new Promise((resolve, reject) => {
+    if (loadingCodePenEmbedScriptPromise) {
+        return loadingCodePenEmbedScriptPromise;
+    }
+
+    loadingCodePenEmbedScriptPromise = new Promise((resolve, reject) => {
         if (hasCodePenEmbedScript()) {
             return resolve();
         }
@@ -20,12 +26,21 @@ export function loadCodePenEmbedScript() {
 
         codepenScriptElem.src = 'https://static.codepen.io/assets/embed/ei.js';
         codepenScriptElem.async = true;
-        
+
         codepenScriptElem.addEventListener('load', resolve);
         codepenScriptElem.addEventListener('error', reject);
 
         document.body.appendChild(codepenScriptElem);
     });
+
+    loadingCodePenEmbedScriptPromise
+        .catch(err => {
+            // don't keep errors cached
+            loadingCodePenEmbedScriptPromise = null;
+            throw err;
+        });
+
+    return loadingCodePenEmbedScriptPromise;
 }
 
 export function copyAttributes(fromElem, toElem, attrs) {
