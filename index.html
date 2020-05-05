@@ -11,23 +11,23 @@
         name="codepen-slug"
         id="codepen-slug">
 
-    <code-pen></code-pen>
+    <code-bed></code-bed>
 
-    <code-pen
+    <code-bed
         data-slug-hash="RwWxWNB"
-        data-height="150"></code-pen>
+        data-height="150"></code-bed>
 
-    <code-pen
+    <code-bed
         data-slug-hash="bGVYYRd"
-        data-height="400"></code-pen>
+        data-height="400"></code-bed>
 
     <script src="dist/codepen.js"></script>
     <script>
-        customElements.define('code-pen', CodePen);
+        customElements.define('code-bed', CodePen);
 
         window.addEventListener('load', () => {
             const codepenSlugInput = document.getElementById('codepen-slug');
-            const codepen = document.querySelector('code-pen');
+            const codepen = document.querySelector('code-bed');
 
             codepenSlugInput.addEventListener('input', () => {
                 codepen.setAttribute('data-slug-hash', codepenSlugInput.value);
