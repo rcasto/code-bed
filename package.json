@@ -1,6 +1,6 @@
 {
   "name": "code-bed",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web component for embedded CodePens.",
   "main": "index.js",
   "scripts": {
