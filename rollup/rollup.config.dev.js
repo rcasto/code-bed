@@ -1,10 +1,10 @@
-import commonConfig, { bundleName } from './rollup.config';
+import commonConfig, { bundleName, bundleNameGlobal } from './rollup.config';
 
 const config = {
     ...commonConfig,
     output: [
 		{
-			name: 'CodePen',
+			name: bundleNameGlobal,
 			file: `dist/${bundleName}.js`,
 			format: 'iife'
 		},

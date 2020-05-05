@@ -23,7 +23,7 @@ A web component for [embedded CodePens](https://blog.codepen.io/documentation/em
 
     <script src="https://cdn.jsdelivr.net/npm/code-bed@1.0.1/dist/codebed.min.js"></script>
     <script>
-        customElements.define('code-bed', CodePen);
+        customElements.define('code-bed', CodeBed);
     </script>
 </body>
 </html>

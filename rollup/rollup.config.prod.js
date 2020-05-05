@@ -1,11 +1,11 @@
-import commonConfig, { bundleName } from './rollup.config';
+import commonConfig, { bundleName, bundleNameGlobal } from './rollup.config';
 import { terser } from 'rollup-plugin-terser';
 
 const config = {
     ...commonConfig,
     output: [
 		{
-			name: 'CodePen',
+			name: bundleNameGlobal,
 			file: `dist/${bundleName}.min.js`,
 			format: 'iife'
 		},
