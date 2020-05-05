@@ -5,7 +5,10 @@
     <title>CodePen Component Test</title>
 </head>
 <body>
-    <input type="text" name="codepen" id="codepen-slug">
+    <input
+        type="text"
+        name="codepen"
+        id="codepen-slug">
 
     <code-pen></code-pen>
 
@@ -20,6 +23,8 @@
             codepenSlugInput.addEventListener('input', () => {
                 codepen.setAttribute('data-slug-hash', codepenSlugInput.value);
             });
+
+            codepen.setAttribute('data-slug-hash', codepenSlugInput.value);
         });
     </script>
 </body>

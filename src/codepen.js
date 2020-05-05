@@ -1,12 +1,14 @@
 // https://blog.codepen.io/documentation/embedded-pens/#the-embed-code-0
 const templateContent = `
   <div class="codepen-container">
-    <div class="codepen-component-embed"></div>
+    <div class="codepen-component-embed">
+      No CodePen connected
+    </div>
   </div>
 `;
 
 // https://blog.codepen.io/documentation/embedded-pens/#override-attributes-5
-const codepenEmbedAttributes = [
+const codepenEmbedAttributes = Object.freeze([
   "data-theme-id",
   "data-slug-hash",
   "data-user",
@@ -24,7 +26,7 @@ const codepenEmbedAttributes = [
   "data-class",
   "data-custom-css-url",
   "data-preview"
-];
+]);
 
 const template = document.createElement('template');
 template.innerHTML = templateContent;
