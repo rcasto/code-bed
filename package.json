@@ -1,7 +1,7 @@
 {
-  "name": "codepen-component",
+  "name": "code-pen",
   "version": "1.0.0",
-  "description": "",
+  "description": "A web component for embedded CodePens.",
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all clean --parallel start:server start:dev",
