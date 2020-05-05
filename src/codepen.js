@@ -1,19 +1,30 @@
 // https://blog.codepen.io/documentation/embedded-pens/#the-embed-code-0
 const templateContent = `
   <div class="codepen-container">
-    <p
-      class="codepen-component-embed"
-      data-height="300"
-      data-theme-id="light"
-      data-default-tab="js,result"
-      data-user="Mamboleoo"
-      data-slug-hash="wVGGzV"
-      style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;"
-      data-pen-title="Walkers - How to">
-    </p>
+    <div class="codepen-component-embed"></div>
   </div>
 `;
-// <slot name="codepen-fallback"></slot>
+
+// https://blog.codepen.io/documentation/embedded-pens/#override-attributes-5
+const codepenEmbedAttributes = [
+  "data-theme-id",
+  "data-slug-hash",
+  "data-user",
+  "data-default-tab",
+  "data-height",
+  "data-show-tab-bar",
+  "data-animations",
+  "data-border",
+  "data-border-color",
+  "data-tab-bar-color",
+  "data-tab-link-color",
+  "data-active-tab-color",
+  "data-active-link-color",
+  "data-link-logo-color",
+  "data-class",
+  "data-custom-css-url",
+  "data-preview"
+];
 
 const template = document.createElement('template');
 template.innerHTML = templateContent;
@@ -30,18 +41,34 @@ function hasCodePenEmbedScriptLoaded() {
   return typeof window.__CPEmbed === 'function';
 }
 
+function copyAttributes(fromElem, toElem, attrs) {
+  attrs
+    .forEach(attr => {
+      const attrValue = fromElem.getAttribute(attr);
+      if (typeof attrValue === 'string') {
+        toElem.setAttribute(attr, attrValue);
+      }
+    });
+}
+
 export default class CodePen extends HTMLElement {
-  // https://blog.codepen.io/documentation/embedded-pens/#override-attributes-5
+
   static get observedAttributes() {
-    return [
-      'data-slug-hash'
-    ];
+    return codepenEmbedAttributes;
   }
 
   constructor() {
     super();
 
     this.codepenEmbedElem = null;
+  }
+  resetContent() {
+    const templateClone = template.content.cloneNode(true);
+
+    this.textContent = '';
+
+    this.appendChild(templateClone);
+    this.codepenEmbedElem = this.querySelector('.codepen-component-embed');
   }
   // https://blog.codepen.io/documentation/embedded-pens/#delayed-embeds-6
   initCodePenEmbedScript() {
@@ -51,7 +78,6 @@ export default class CodePen extends HTMLElement {
 
     const codepenScriptElem = document.createElement('script');
     codepenScriptElem.addEventListener('load', () => {
-      console.log('codepen embed script loaded');
       triggerCodePenEmbedReload();
     });
     codepenScriptElem.src = 'https://static.codepen.io/assets/embed/ei.js';
@@ -65,18 +91,16 @@ export default class CodePen extends HTMLElement {
       return;
     }
 
-    const templateClone = template.content.cloneNode(true);
+    this.resetContent();
+    copyAttributes(this, this.codepenEmbedElem, codepenEmbedAttributes);
 
-    this.appendChild(templateClone);
     this.initCodePenEmbedScript();
-
-    this.codepenEmbedElem = this.querySelector('.codepen-component-embed');
   }
   attributeChangedCallback() {
     console.log('attribute changed');
 
-    this.codepenEmbedElem.setAttribute('data-slug-hash', this.getAttribute('data-slug-hash'));
-
+    this.resetContent();
+    copyAttributes(this, this.codepenEmbedElem, codepenEmbedAttributes);
     triggerCodePenEmbedReload();
   }
   disconnectedCallback() {
