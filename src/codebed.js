@@ -18,7 +18,7 @@ const templateContent = `
 const template = document.createElement('template');
 template.innerHTML = templateContent;
 
-export default class CodePen extends HTMLElement {
+export default class CodeBed extends HTMLElement {
 
   static get observedAttributes() {
     return codepenEmbedAttributes;
@@ -55,4 +55,15 @@ export default class CodePen extends HTMLElement {
   attributeChangedCallback() {
     this.reloadCodePenEmbed();
   }
+}
+
+/*
+  Register or associate the web component
+  with a <code-bed></code-bed> element
+*/
+try {
+  customElements.define('code-bed', CodeBed);
+} catch(err) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#Exceptions
+  console.error(err);
 }
