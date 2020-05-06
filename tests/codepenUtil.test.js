@@ -1,4 +1,4 @@
-import { loadCodePenEmbedScript } from '../src/util';
+import { loadCodePenEmbedScript } from '../src/codepenUtil';
 
 describe('loadCodePenEmbedScript Tests', () => {
     let createElementSpy;
