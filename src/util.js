@@ -1,3 +1,5 @@
+const codepenEmbedScriptUrl = 'https://static.codepen.io/assets/embed/ei.js';
+
 let loadingCodePenEmbedScriptPromise = null;
 
 function hasCodePenEmbedScript() {
@@ -24,7 +26,7 @@ export function loadCodePenEmbedScript() {
 
         const codepenScriptElem = document.createElement('script');
 
-        codepenScriptElem.src = 'https://static.codepen.io/assets/embed/ei.js';
+        codepenScriptElem.src = codepenEmbedScriptUrl;
         codepenScriptElem.async = true;
 
         codepenScriptElem.addEventListener('load', resolve);
