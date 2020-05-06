@@ -16,6 +16,11 @@
     "prepublishOnly": "npm-run-all test build"
   },
   "author": "Richie Casto (https://github.com/rcasto)",
+  "homepage": "https://github.com/rcasto/code-bed#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rcasto/code-bed.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.9.6",
