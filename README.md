@@ -1,7 +1,7 @@
 # code-bed
 A web component for [embedded CodePens](https://blog.codepen.io/documentation/embedded-pens/).
 
-[Try it out!](https://codepen.io/rcasto/pen/ExVoXKW)
+[Try it out!](https://codepen.io/rcasto/full/ExVoXKW)
 
 ## Usage
 1. Include the script tag on your page or include in your bundle.
