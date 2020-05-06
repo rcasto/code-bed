@@ -2,7 +2,8 @@
   "name": "code-bed",
   "version": "1.0.3",
   "description": "A web component for embedded CodePens.",
-  "main": "index.js",
+  "main": "dist/codebed.cjs.min.js",
+  "module": "dist/codebed.es.min.js",
   "scripts": {
     "start": "npm-run-all clean --parallel start:server start:dev",
     "start:server": "http-server ./",
@@ -26,7 +27,7 @@
     "jest": "26.0.1",
     "npm-run-all": "4.1.5",
     "rimraf": "3.0.2",
-    "rollup": "2.7.6",
+    "rollup": "2.8.0",
     "rollup-plugin-terser": "5.3.0"
   }
 }
