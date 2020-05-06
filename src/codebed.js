@@ -56,7 +56,10 @@ export default class CodeBed extends HTMLElement {
     loadCodePenEmbedScript()
       .then(triggerCodePenEmbedReload)
       // Would probably want to handle this better later
-      .catch(console.error);
+      .catch(err => {
+        this.codepenEmbedElem.textContent = 'An error occurred while loading the CodePen';
+        console.error(err);
+      });
   }
   connectedCallback() {
     // https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements#Using_the_lifecycle_callbacks
