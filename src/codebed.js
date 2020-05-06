@@ -1,22 +1,32 @@
 import {
   triggerCodePenEmbedReload,
   loadCodePenEmbedScript,
-  copyAttributes,
   codepenEmbedAttributes,
+  codepenEmbedContainerClass,
   codepenEmbedClass
-} from './util';
+} from './codepenUtil';
+import {
+  copyAttributes,
+  createTemplateFromString
+} from './domUtil';
 
 // https://blog.codepen.io/documentation/embedded-pens/#the-embed-code-0
+const embedTemplateContent = `
+  <div class="${codepenEmbedClass}">
+    No CodePen connected
+  </div>
+`;
+
 const templateContent = `
-  <div class="codepen-container">
-    <div class="${codepenEmbedClass}">
-      No CodePen connected
+  <div>
+    <div class="${codepenEmbedContainerClass}">
+      ${embedTemplateContent}
     </div>
   </div>
 `;
 
-const template = document.createElement('template');
-template.innerHTML = templateContent;
+const template = createTemplateFromString(templateContent);
+const embedTemplate = createTemplateFromString(embedTemplateContent);
 
 export default class CodeBed extends HTMLElement {
 
@@ -27,16 +37,20 @@ export default class CodeBed extends HTMLElement {
   constructor() {
     super();
 
+    this.codepenEmbedContainerElem = null;
     this.codepenEmbedElem = null;
   }
   reloadCodePenEmbed() {
-    const templateClone = template.content.cloneNode(true);
+    if (!this.codepenEmbedContainerElem) {
+      return;
+    }
 
-    this.textContent = '';
-
-    this.appendChild(templateClone);
-    this.codepenEmbedElem = this.querySelector(`.${codepenEmbedClass}`);
-
+    this.codepenEmbedContainerElem.textContent = '';
+  
+    const embedTemplateClone = embedTemplate.content.cloneNode(true);
+    this.codepenEmbedContainerElem.appendChild(embedTemplateClone);
+    
+    this.codepenEmbedElem = this.codepenEmbedContainerElem.querySelector(`.${codepenEmbedClass}`);
     copyAttributes(this, this.codepenEmbedElem, codepenEmbedAttributes);
 
     loadCodePenEmbedScript()
@@ -50,6 +64,10 @@ export default class CodeBed extends HTMLElement {
       return;
     }
 
+    const templateClone = template.content.cloneNode(true);
+    this.appendChild(templateClone);
+
+    this.codepenEmbedContainerElem = this.querySelector(`.${codepenEmbedContainerClass}`);
     this.reloadCodePenEmbed();
   }
   attributeChangedCallback() {
