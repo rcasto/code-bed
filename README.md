@@ -19,7 +19,7 @@ A web component for [embedded CodePens](https://blog.codepen.io/documentation/em
         data-height="150">
     </code-bed>
 
-    <script async src="https://cdn.jsdelivr.net/npm/code-bed@1.0.4/dist/codebed.min.js"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/code-bed@1.0.5/dist/codebed.min.js"></script>
 </body>
 </html>
 ```
