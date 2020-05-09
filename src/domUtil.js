@@ -14,15 +14,14 @@ export function createTemplateFromString(templateHTMLString) {
     return template;
 }
 
-// const defaultIntersectionObeserverOptions = Object.freeze({
-//     rootMargin: '0px',
-//     threshold: 0.25
-// });
+const defaultIntersectionObeserverOptions = Object.freeze({
+    rootMargin: '20px',
+});
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 export function createIntersectionObserver(observerCallback) {
     if (typeof IntersectionObserver !== 'function') {
         return null;
     }
-    return new IntersectionObserver(observerCallback);
+    return new IntersectionObserver(observerCallback, defaultIntersectionObeserverOptions);
 }
