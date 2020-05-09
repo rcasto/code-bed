@@ -83,7 +83,9 @@ export default class CodeBed extends HTMLElement {
     // including this hash to allow individual triggering
     // or loading of it when it comes into view
     if (this.codePenSlugHash) {
-      this.codepenEmbedElem.classList.add(`${codepenEmbedClass}-${this.codePenSlugHash}`);
+      const codePenSlugHash = this.codePenSlugHash ?
+        `-${this.codePenSlugHash}` : '';
+      this.codepenEmbedElem.classList.add(`${codepenEmbedClass}${codePenSlugHash}`);
     }
 
     copyAttributes(this, this.codepenEmbedElem, codepenEmbedAttributes);
