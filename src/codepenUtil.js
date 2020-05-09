@@ -1,10 +1,8 @@
-const codepenEmbedScriptUrl = 'https://static.codepen.io/assets/embed/ei.js';
-let loadingCodePenEmbedScriptPromise = null;
-
 function hasCodePenEmbedScript() {
     return typeof window.__CPEmbed === 'function';
 }
 
+export const codepenEmbedScriptUrl = 'https://static.codepen.io/assets/embed/ei.js';
 export const codepenEmbedContainerClass = 'code-bed-embed-container';
 export const codepenEmbedClass = 'code-bed-embed';
 
@@ -37,6 +35,7 @@ export function triggerCodePenEmbedReload() {
     window.__CPEmbed(`.${codepenEmbedClass}`);
 }
 
+let loadingCodePenEmbedScriptPromise = null;
 export function loadCodePenEmbedScript() {
     if (loadingCodePenEmbedScriptPromise) {
         return loadingCodePenEmbedScriptPromise;
