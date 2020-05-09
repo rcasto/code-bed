@@ -1,7 +1,3 @@
-function hasCodePenEmbedScript() {
-    return typeof window.__CPEmbed === 'function';
-}
-
 export const codepenEmbedScriptUrl = 'https://static.codepen.io/assets/embed/ei.js';
 export const codepenEmbedContainerClass = 'code-bed-embed-container';
 export const codepenEmbedClass = 'code-bed-embed';
@@ -27,6 +23,16 @@ export const codepenEmbedAttributes = Object.freeze([
     "data-preview"
 ]);
 
+let loadingCodePenEmbedScriptPromise = null;
+
+export function hasCodePenEmbedScript() {
+    return typeof window.__CPEmbed === 'function';
+}
+
+export function reset() {
+    loadingCodePenEmbedScriptPromise = null;
+}
+
 export function triggerCodePenEmbedReload() {
     if (!hasCodePenEmbedScript()) {
         return;
@@ -35,7 +41,6 @@ export function triggerCodePenEmbedReload() {
     window.__CPEmbed(`.${codepenEmbedClass}`);
 }
 
-let loadingCodePenEmbedScriptPromise = null;
 export function loadCodePenEmbedScript() {
     if (loadingCodePenEmbedScriptPromise) {
         return loadingCodePenEmbedScriptPromise;
@@ -60,7 +65,7 @@ export function loadCodePenEmbedScript() {
     loadingCodePenEmbedScriptPromise
         .catch(err => {
             // don't keep errors cached
-            loadingCodePenEmbedScriptPromise = null;
+            reset();
             throw err;
         });
 
