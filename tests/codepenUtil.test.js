@@ -39,7 +39,7 @@ describe('loadCodePenEmbedScript Tests', () => {
             .toHaveBeenCalledWith('error', expect.any(Function));
     });
 
-    test('can resolve on successful load of codepen embed script', () => {
+    test('can resolve on successful load of codepen embed script', async () => {
         const loadPenPromise = loadCodePenEmbedScript();
 
         // This triggers the 'load' event
@@ -47,10 +47,16 @@ describe('loadCodePenEmbedScript Tests', () => {
         mockCodePenScriptElem.addEventListener
             .mock.calls[0][1]();
         
-        expect(loadPenPromise).resolves.toHaveReturned();
+        try {
+            await loadPenPromise;
+        } catch (err) {
+            // This line should not be reached as the above call in the try
+            // should resolve. If the below line is hit, it should fail out.
+            expect(false).toEqual(true);
+        }
     });
 
-    test('can reject on error of loading codepen embed script', () => {
+    test('can reject on error of loading codepen embed script', async () => {
         const loadPenPromise = loadCodePenEmbedScript();
 
         // This triggers the 'error' event
@@ -58,8 +64,15 @@ describe('loadCodePenEmbedScript Tests', () => {
         mockCodePenScriptElem.addEventListener
             .mock.calls[1][1]('fake-error');
         
-        // The promise should now throw
-        expect(loadPenPromise).rejects.toThrow('fake-error');
+        try {
+            await loadPenPromise;
+
+            // This line should not be reached as the above call
+            // should reject. If the below line is hit, it should fail out.
+            expect(false).toEqual(true);
+        } catch (err) {
+            expect(err).toEqual('fake-error');
+        }
     });
 
     test('can not create and append codepen embed script when already present', async () => {
@@ -88,7 +101,7 @@ describe('loadCodePenEmbedScript Tests', () => {
         try {
             await loadPenPromise;
 
-            // This line should not be reahed as the above call
+            // This line should not be reached as the above call
             // should reject. If the below line is hit, it should fail out.
             expect(false).toEqual(true);
         } catch(err) {
