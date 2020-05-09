@@ -33,12 +33,12 @@ export function reset() {
     loadingCodePenEmbedScriptPromise = null;
 }
 
-export function triggerCodePenEmbedReload() {
+export function triggerCodePenEmbedReload(slugHash) {
     if (!hasCodePenEmbedScript()) {
         return;
     }
 
-    window.__CPEmbed(`.${codepenEmbedClass}`);
+    window.__CPEmbed(`.${codepenEmbedClass}${slugHash ? `-${slugHash}` : ''}`);
 }
 
 export function loadCodePenEmbedScript() {
